@@ -12,15 +12,23 @@ describe("savedapi controller tests", () => {
     SavedApiModel.find = originalFind;
   });
 
-  it("should return 200 status code if saved apis array exists ", async () => {
-    mockedFind.mockResolvedValue({ allSavedApis: [] });
+  it("should return valid data and status code of 200  ", async () => {
+    mockedFind.mockResolvedValue({
+      allSavedApis: [
+        { API: "test api" },
+        { API: "test api 2" },
+        { API: "test api 3" },
+      ],
+    });
     const req = {} as express.Request;
     const res = {
       status: jest.fn().mockReturnThis(),
+      allSavedApis: Array<typeof SavedApiModel>,
     };
 
     await getSavedApis(req, res as any);
 
     expect(res.status).toHaveBeenCalledWith(200);
+    expect(res).toHaveProperty("allSavedApis");
   });
 });
