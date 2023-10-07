@@ -9,11 +9,10 @@ const getSavedApis = async (req: express.Request, res: Response) => {
   }
 };
 
-// const postSavedApi = async (req: express.Request, res: express.Response) => {
-//   try {
-
-//   } catch (error) {}
-// };
+const postSavedApi = async (req: express.Request, res: express.Response) => {
+  try {
+  } catch (error) {}
+};
 // const updateSavedApi = async (req: express.Request, res: express.Response) => {
 
 //   try {
