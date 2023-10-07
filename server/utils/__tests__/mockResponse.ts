@@ -13,3 +13,11 @@ export const mockResponse = (responseValuesConfig?: Record<string, any>) => {
     res,
   };
 };
+
+export const mockResponseWithJson = () => {
+  const res = {} as Response;
+  //@ts-ignore
+  res.status = jest.fn().mockReturnValue(res);
+  res.json = jest.fn().mockReturnValue(res);
+  return res;
+};
