@@ -1,17 +1,12 @@
 import { getSavedApis } from "../../controllers/savedapi.controller";
 import SavedApiModel from "../../mongodb/models/savedapi";
-import { mockRequestAndResponse } from "../../utils/mockRequestAndResponse";
+import { mockFindModel } from "../../utils/__tests__/mockFindModel";
+import { mockResponse } from "../../utils/__tests__/mockResponse";
 
 describe("savedapi controller tests", () => {
   jest.mock("../../mongodb/models/savedapi");
   const mockedFind = jest.fn();
-  const originalFind = SavedApiModel.find;
-  beforeEach(() => {
-    SavedApiModel.find = mockedFind;
-  });
-  afterEach(() => {
-    SavedApiModel.find = originalFind;
-  });
+  mockFindModel(SavedApiModel, mockedFind);
 
   it("should return valid data and status code of 200  ", async () => {
     mockedFind.mockResolvedValue({
@@ -21,7 +16,7 @@ describe("savedapi controller tests", () => {
         { API: "test api 3" },
       ],
     });
-    const { req, res } = mockRequestAndResponse({
+    const { req, res } = mockResponse({
       allSavedApis: Array<typeof SavedApiModel>,
     });
 
@@ -32,7 +27,7 @@ describe("savedapi controller tests", () => {
   });
   it("should send status code of 404 upon error  ", async () => {
     mockedFind.mockResolvedValue({});
-    const { req, res } = mockRequestAndResponse();
+    const { req, res } = mockResponse();
     await getSavedApis(req, res as any);
     expect(res.status).toHaveBeenCalledWith(404);
     expect(res).not.toHaveProperty("allSavedApis");

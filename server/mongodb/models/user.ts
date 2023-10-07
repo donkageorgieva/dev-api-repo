@@ -3,7 +3,8 @@ import mongoose, { Model, Schema } from "mongoose";
 const UserSchema = new mongoose.Schema({
   username: { type: String, required: true },
   email: { type: String, required: true },
-  avatar: { type: String },
+  password: { type: String, required: true },
+  id: { type: String },
   savedAPIs: [{ type: mongoose.Schema.Types.ObjectId, ref: "Savedapi" }],
 });
 

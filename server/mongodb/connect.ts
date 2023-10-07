@@ -8,8 +8,9 @@ const connectDB = async (URL: string) => {
     const connection = await mongoose.connect(URL);
     if (connection) {
       console.log("Connected to db");
+    } else {
+      throw new Error("No database connection");
     }
-    throw new Error("No database connection");
   } catch (error) {
     return error;
   }
