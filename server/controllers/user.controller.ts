@@ -1,7 +1,8 @@
-import express, { Request, Response } from "express";
+import { Request, Response } from "express";
 import UserModel from "../mongodb/models/user";
 import bcrypt from "bcrypt";
 import * as jwt from "jsonwebtoken";
+
 const signUp = async (req: Request, res: Response) => {
   const { email, password, confirmPassword, username } = req.body;
   try {
@@ -28,6 +29,7 @@ const signUp = async (req: Request, res: Response) => {
       .status(200)
       .json({ email: result.email, username: result.username, token });
   } catch (error) {
+    console.log(error);
     res.status(500).json({ message: "Something went wrong!" });
   }
 };

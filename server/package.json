@@ -5,7 +5,7 @@
   "main": "server.ts",
   "scripts": {
     "start": "nodemon server.ts",
-    "test": "jest"
+    "test": "jest --watchAll --detectOpenHandles"
   },
   "author": "",
   "license": "ISC",
